@@ -16,6 +16,34 @@ input {
     background-color: beige;
     text-align: end;
     font-size: 62px;
+    border-radius: 8px;
+}
+
+.clear-row {
+    display: flex;
+    justify-content: space-between;
+}
+.clear {
+    height: 48px;
+    width: 136px;
+    font-size: 32px;
+    border-radius: 8px;
+    background-color: rgb(57, 111, 247);
+}
+
+.solar {
+    display: flex;
+    justify-content: space-around;
+    width: 150px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 4px;
+    background-color: rgb(156, 83, 5);
+}
+
+.solar div {
+    width: 2px;
+    background-color: orange;
 }
 
 #calculator {
@@ -34,7 +62,7 @@ input {
 .buttons {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px
+    gap: 12px;
 }
 
 .buttons button {
@@ -42,4 +70,9 @@ input {
     height: 60px;
     flex: 1 1 20%;
     font-size: 24px;
+    border-radius: 6px;
+}
+
+.oper, .equal {
+    background-color: rgb(250, 165, 6);
 }
