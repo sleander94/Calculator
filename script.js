@@ -16,7 +16,25 @@ function divide (a, b) {
 }
 
 function operate (a, b, operator) {
-    return operator(a, b);
+    return +operator(a, b).toFixed(2);
+}
+
+function showAnswer () {
+    let calculation = operate(storedValue, display.value, storedOperator);
+    if (calculation == Infinity) {
+        clearValues();
+        return alert("You can't divide by 0");
+    }
+    display.value = calculation;
+    displayCalc = 0;
+}
+
+function clearValues () {
+    display.value = 0;
+    storedValue = 0;
+    storedCalculation = 0;
+    storedOperator = "";
+    displayCalc = 0;
 }
 
 // Delcare starting variables
@@ -34,26 +52,26 @@ numbers.forEach (number => number.addEventListener ("click", () => {
     if (display.value == storedValue) {
         display.value = "";
     }
-    display.value += number.textContent;
+    if (number.classList.contains("decimal")) {
+        if (display.value.indexOf(".") === -1){
+            display.value += number.textContent;    
+        } else {}
+    } else {
+        display.value += number.textContent;
+    }
 }));
 
 // Clear display and values
 const clear = document.querySelector(".clear");
 clear.addEventListener('click', () => {
-    display.value = 0;
-    storedValue = 0;
-    storedCalculation = 0;
-    storedOperator = "";
-    displayCalc = 0;
+    clearValues();
 });
 
 // Store value and start operate function when operator button is pressed
 const operators = document.querySelectorAll(".oper");
 operators.forEach (oper => oper.addEventListener ("click", () => {
     if (displayCalc) {
-        let calculation = operate(storedValue, display.value, storedOperator);
-        display.value = calculation;
-        displayCalc = 0;
+        showAnswer();
     }
     storedValue = display.value;
     storedOperator = window[oper.name];
@@ -63,7 +81,7 @@ operators.forEach (oper => oper.addEventListener ("click", () => {
 // Perform calculation when equal button is pressed
 const equal = document.querySelector(".equal");
 equal.addEventListener("click", () => {
-    let calculation = operate(storedValue, display.value, storedOperator);
-    display.value = calculation;
-    displayCalc = 0;
+    if (displayCalc) {
+    showAnswer();
+    }
 });
